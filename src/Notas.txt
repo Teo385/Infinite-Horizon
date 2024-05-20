@@ -1,0 +1,28 @@
+COMO HACERLO
+
+//spring boot usando arquiteturas de capas
+//entity
+//reposotory JPA Repository
+//services  Mapeo/DTO
+//controllers
+
+
+/*
+1. usar una sola entidad
+2.probar todos los servicios
+3.relacionar las entidades
+4.mapeo/DTO
+5.y volver a intentar desde el 1
+* */
+
+
+//como consumir api con js y fetch
+
+____________________________________________________
+
+TENER EN CUENTA
+
+//Deberias hacer el try en lo servicios al igual que en el controlador
+//Regex (validaciones)
+//pruebas unitarias en servicios y controladores
+//junit
