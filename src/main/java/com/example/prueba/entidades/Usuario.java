@@ -1,16 +1,17 @@
 package com.example.prueba.entidades;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_USUARIO")
-    private Long idUsuario;
+    private Integer idUsuario;
 
     @Column(name = "NOMBRE")
     private String nombre;
@@ -22,7 +23,7 @@ public class Usuario {
     private String cedula;
 
     @Column(name = "PIN")
-    private String pin;
+    private String contrasena;
 
     @Column(name = "FECHA_NACIMIENTO")
     private LocalDateTime fechaNacimiento;
@@ -39,50 +40,48 @@ public class Usuario {
     @Column(name = "TELEFONO")
     private String telefono;
 
-    @Column(name = "TIPO")
-    private Number tipo;
 
     //Tal vez ignorar en el mapper
-/*
-    @OneToOne(mappedBy = "usuario")
-    private Estudiante estudiante;
 
-    @OneToOne(mappedBy = "usuario")
-    private Profesor profesor;
+//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Estudiante estudiante;
+//
+//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Profesor profesor;
+//
+//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private Empleado empleado;
+//
+//
+//    public Estudiante getEstudiante() {
+//        return estudiante;
+//    }
+//
+//    public void setEstudiante(Estudiante estudiante) {
+//        this.estudiante = estudiante;
+//    }
+//
+//    public Profesor getProfesor() {
+//        return profesor;
+//    }
+//
+//    public void setProfesor(Profesor profesor) {
+//        this.profesor = profesor;
+//    }
+//
+//    public Empleado getEmpleado() {
+//        return empleado;
+//    }
+//
+//    public void setEmpleado(Empleado empleado) {
+//        this.empleado = empleado;
+//    }
 
-    @OneToOne(mappedBy = "usuario")
-    private Empleado empleado;
-
-
-    public Estudiante getEstudiante() {
-        return estudiante;
-    }
-
-    public void setEstudiante(Estudiante estudiante) {
-        this.estudiante = estudiante;
-    }
-
-    public Profesor getProfesor() {
-        return profesor;
-    }
-
-    public void setProfesor(Profesor profesor) {
-        this.profesor = profesor;
-    }
-
-    public Empleado getEmpleado() {
-        return empleado;
-    }
-
-    public void setEmpleado(Empleado empleado) {
-        this.empleado = empleado;
-    }
-*/
-    public Long getIdUsuario() {
+    public Integer getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Long idUsuario) {
+    public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
     }
 
@@ -110,12 +109,12 @@ public class Usuario {
         this.cedula = cedula;
     }
 
-    public String getPin() {
-        return pin;
+    public String getContrasena() {
+        return contrasena;
     }
 
-    public void setPin(String pin) {
-        this.pin = pin;
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 
     public LocalDateTime getFechaNacimiento() {
@@ -158,11 +157,5 @@ public class Usuario {
         this.telefono = telefono;
     }
 
-    public Number getTipo() {
-        return tipo;
-    }
 
-    public void setTipo(Number tipo) {
-        this.tipo = tipo;
-    }
 }

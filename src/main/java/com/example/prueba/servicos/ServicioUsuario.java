@@ -13,20 +13,21 @@ public class ServicioUsuario {
     @Autowired
     UsuarioRepositorio usuarioRepositorio;
 
-//    public List<Usuario> buscaTodo() throws Exception {
-//
-//        try {
-//            //validaciones
-//            return (List<Usuario>) this.usuarioRepositorio.findAll();
-//        } catch (Exception error) {
-//            throw new Exception("parce no dio");
-//        }
-//    }
-    public List<Usuario> buscaTodo()  {
-        return (List<Usuario>) this.usuarioRepositorio.findAll();
+   public List<Usuario> buscaTodo() throws Exception {
+
+        try {
+            //validaciones
+            return this.usuarioRepositorio.findAll();
+       } catch (Exception error) {
+            throw new Exception("parce no dio");
+       }
     }
 
-    public Usuario getUser(Integer id){
+    public List<Usuario> findAllDistinct() {
+        return usuarioRepositorio.findAllDistinct();
+    }
+
+    public Usuario getUsuario(Integer id){
         return usuarioRepositorio.getReferenceById(id);
     }
 
@@ -34,12 +35,9 @@ public class ServicioUsuario {
         return usuarioRepositorio.findByGeneroOrderByNombreAsc(genero);
     }
 
-    public List<Usuario> getByTipo(Number tipo){
-        return usuarioRepositorio.findByTipo(tipo);
-    }
 
-    public Usuario save(Usuario user){
-        return usuarioRepositorio.save(user);
+    public Usuario save(Usuario usuario){
+        return usuarioRepositorio.save(usuario);
     }
 
     public boolean delete(Integer id) {
