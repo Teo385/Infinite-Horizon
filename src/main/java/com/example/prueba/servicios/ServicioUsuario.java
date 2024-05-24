@@ -1,4 +1,4 @@
-package com.example.prueba.servicos;
+package com.example.prueba.servicios;
 
 import com.example.prueba.entidades.Usuario;
 import com.example.prueba.repositorios.UsuarioRepositorio;

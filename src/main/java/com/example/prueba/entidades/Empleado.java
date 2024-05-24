@@ -1,21 +1,26 @@
-package com.University.of.the.infinite.Horizon.persistence.entity;
+package com.example.prueba.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-
-
 
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Empleados")
 public class Empleado {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_EMPLEADO")
-    private Number idEmpleado;
+    private Integer idEmpleado;
 
     @Column(name = "FK_ID_USUARIO")
-    private Number fkIdUsuario;
+    private Integer fkIdUsuario;
+
+    @OneToOne
+    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO",insertable = false, updatable = false)
+    @JsonBackReference
+    private Usuario usuario;
 
     @Column(name = "AREA")
     private String area;
@@ -26,10 +31,13 @@ public class Empleado {
     @Column(name = "CARGO")
     private String cargo;
 
-    @OneToOne
-    @JoinColumn(name = "FK_ID_Usuario", insertable = false, updatable = false)
-    private Usuario usuario;
+    public Integer getFkIdUsuario() {
+        return fkIdUsuario;
+    }
 
+    public void setFkIdUsuario(Integer fkIdUsuario) {
+        this.fkIdUsuario = fkIdUsuario;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -39,21 +47,14 @@ public class Empleado {
         this.usuario = usuario;
     }
 
-    public Number getIdEmpleado() {
+    public Integer getIdEmpleado() {
         return idEmpleado;
     }
 
-    public void setIdEmpleado(Number idEmpleado) {
+    public void setIdEmpleado(Integer idEmpleado) {
         this.idEmpleado = idEmpleado;
     }
 
-    public Number getFkIdUsuario() {
-        return fkIdUsuario;
-    }
-
-    public void setFkIdUsuario(Number fkIdUsuario) {
-        this.fkIdUsuario = fkIdUsuario;
-    }
 
     public String getArea() {
         return area;

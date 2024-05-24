@@ -12,7 +12,7 @@ import java.util.Locale;
 
 @RestController
 @RequestMapping("/usuario")
-public class UsuarioControlador {
+public class UsuarioController {
 
     @Autowired
     ServicioUsuario servicioUsuario;

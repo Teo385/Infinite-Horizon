@@ -1,10 +1,13 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+@JsonInclude(JsonInclude.Include.NON_NULL)
 @Entity
 @Table(name = "USUARIO")
 public class Usuario {
@@ -40,42 +43,42 @@ public class Usuario {
     @Column(name = "TELEFONO")
     private String telefono;
 
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Estudiante estudiante;
 
-    //Tal vez ignorar en el mapper
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Profesor profesor;
 
-//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Estudiante estudiante;
-//
-//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Profesor profesor;
-//
-//    @OneToOne(mappedBy = "usuario", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-//    private Empleado empleado;
-//
-//
-//    public Estudiante getEstudiante() {
-//        return estudiante;
-//    }
-//
-//    public void setEstudiante(Estudiante estudiante) {
-//        this.estudiante = estudiante;
-//    }
-//
-//    public Profesor getProfesor() {
-//        return profesor;
-//    }
-//
-//    public void setProfesor(Profesor profesor) {
-//        this.profesor = profesor;
-//    }
-//
-//    public Empleado getEmpleado() {
-//        return empleado;
-//    }
-//
-//    public void setEmpleado(Empleado empleado) {
-//        this.empleado = empleado;
-//    }
+    @OneToOne(mappedBy = "usuario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference
+    private Empleado empleado;
+
+
+    public Estudiante getEstudiante() {
+        return estudiante;
+    }
+
+    public void setEstudiante(Estudiante estudiante) {
+        this.estudiante = estudiante;
+    }
+
+    public Profesor getProfesor() {
+        return profesor;
+    }
+
+    public void setProfesor(Profesor profesor) {
+        this.profesor = profesor;
+    }
+
+    public Empleado getEmpleado() {
+        return empleado;
+    }
+
+    public void setEmpleado(Empleado empleado) {
+        this.empleado = empleado;
+    }
 
     public Integer getIdUsuario() {
         return idUsuario;

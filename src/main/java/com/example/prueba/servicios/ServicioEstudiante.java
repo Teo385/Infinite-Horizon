@@ -4,12 +4,13 @@ import com.example.prueba.entidades.Estudiante;
 import com.example.prueba.repositorios.EstudianteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class EstudianteService {
+public class ServicioEstudiante {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
@@ -18,8 +19,8 @@ public class EstudianteService {
         return estudianteRepository.findAll();
     }
 
-    public Optional<Estudiante> getEstudianteById(Integer id) {
-        return estudianteRepository.findById(id);
+    public Optional<Estudiante> getEstudianteById(Integer idEstudiante) {
+        return estudianteRepository.findById(idEstudiante);
     }
 
     public List<Estudiante> getEstudiantesByAnioIngreso(Integer anioIngreso) {
@@ -34,9 +35,13 @@ public class EstudianteService {
         return estudianteRepository.save(estudiante);
     }
 
-    public void deleteEstudiante(Integer id) {
-        if (estudianteRepository.existsById(id)) {
-            estudianteRepository.deleteById(id);
-        }
+
+    public boolean delete(Integer id) {
+        return estudianteRepository.findById(id)
+                .map(estudiante -> {
+                    estudianteRepository.delete(estudiante);
+                    return true;
+                })
+                .orElse(false);
     }
 }
