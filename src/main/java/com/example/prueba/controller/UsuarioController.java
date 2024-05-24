@@ -1,7 +1,7 @@
 package com.example.prueba.controller;
 
 import com.example.prueba.entidades.Usuario;
-import com.example.prueba.servicos.ServicioUsuario;
+import com.example.prueba.servicios.ServicioUsuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +51,7 @@ public class UsuarioControlador {
             List<Usuario> usuarios = servicioUsuario.getByGenero(generoMayuscula);
             return ResponseEntity
                     .status(HttpStatus.OK)
-                    .body(usuarios);
+                        .body(usuarios);
         } catch (Exception error) {
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
