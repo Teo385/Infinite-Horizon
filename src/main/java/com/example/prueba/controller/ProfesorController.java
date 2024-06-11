@@ -14,13 +14,13 @@ import java.util.List;
 public class ProfesorController {
     @Autowired
     private ServicioProfesor servicioProfesor;
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public ResponseEntity<List<Profesor>> getAllProfesores() {
         List<Profesor> profesores = servicioProfesor.getAllProfesores();
         return new ResponseEntity<>(profesores, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/id/{idProfesor}")
     public ResponseEntity<Profesor> getProfesorById(@PathVariable Integer idProfesor) {
         Profesor profesor = servicioProfesor.getProfesorById(idProfesor);

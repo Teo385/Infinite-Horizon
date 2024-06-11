@@ -21,12 +21,12 @@ public class EstudianteController {
 
     @Autowired
     private EstudianteRepository estudianteRepository;
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public List<Estudiante> getAllEstudiantes() {
         return servicioEstudiante.getAllEstudiantes();
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/id/{idEstudiante}")
     public ResponseEntity<Estudiante> getEstudianteById(@PathVariable Integer idEstudiante) {
         Optional<Estudiante> estudiante = servicioEstudiante.getEstudianteById(idEstudiante);

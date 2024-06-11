@@ -14,6 +14,8 @@ public interface UsuarioRepositorio  extends JpaRepository<Usuario,Integer> {
     List<Usuario> findAllDistinct();
 
     Usuario getReferenceById(Integer id);
+
+    List<Usuario> findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(String nombre, String apellido);
 }
 
 

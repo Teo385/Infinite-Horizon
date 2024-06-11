@@ -14,13 +14,13 @@ import java.util.List;
 public class EmpleadoController {
     @Autowired
     private ServicioEmpleado servicioEmpleado;
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/all")
     public ResponseEntity<List<Empleado>> getAllEmpleados() {
         List<Empleado> empleados = servicioEmpleado.getAllEmpleados();
         return new ResponseEntity<>(empleados, HttpStatus.OK);
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/id/{idEmpleado}")
     public ResponseEntity<Empleado> getEmpleadoById(@PathVariable Integer idEmpleado) {
         Empleado empleado = servicioEmpleado.getEmpleadoById(idEmpleado);

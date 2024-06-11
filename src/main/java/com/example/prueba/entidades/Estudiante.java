@@ -14,6 +14,7 @@ public class Estudiante {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ESTUDIANTE")
     private Integer idEstudiante;
+
     @Column(name = "FK_ID_USUARIO")
     private Integer fkIdUsuario;
 
