@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -82,11 +83,32 @@ public class ServicioUsuario {
     }
 
 
-    public List<Usuario> searchUsuarios(String nombre, String apellido) {
-        return usuarioRepositorio.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(nombre, apellido);
+   // public List<Usuario> searchUsuarios(String nombre, String apellido) {
+   //     return usuarioRepositorio.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(nombre, apellido);
+   // }
+
+   // public List<Usuario> buscarPersona(String nombreCompleto) {
+   //     String[] partes = nombreCompleto.split(" ");
+   //     if (partes.length < 2) {
+   //         System.out.println("Nombre completo no tiene un espacio");
+   //         return Collections.emptyList();
+   //     }
+   //     String nombre = partes[0];
+   //     String apellido = partes[1];
+   //     System.out.println("Nombre: " + nombre);
+   //     System.out.println("Apellido: " + apellido);
+   //     return usuarioRepositorio.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(nombre, apellido);
+   // }
+
+    public List<Usuario> buscarPersona(String nombre, String apellido) {
+        if (apellido != null) {
+            // Buscar por nombre y apellido
+            return usuarioRepositorio.findByNombreContainingIgnoreCaseOrApellidoContainingIgnoreCase(nombre, apellido);
+        } else {
+            // Buscar por nombre
+            return usuarioRepositorio.findByNombre(nombre);
+        }
     }
-
-
 
 }
 

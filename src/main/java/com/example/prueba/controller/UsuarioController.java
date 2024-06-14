@@ -22,6 +22,7 @@ public class UsuarioController {
 
     @Autowired
     ServicioUsuario servicioUsuario;
+
     @CrossOrigin(origins = "http://localhost:4200")
     @Operation(summary = "Obtener todos los usuarios", description = "Retorna una lista de todos los usuarios")
     @ApiResponses(value = {
@@ -43,6 +44,7 @@ public class UsuarioController {
                     .body(error.getMessage());
         }
     }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @Operation(summary = "Obtener usuario por ID", description = "Retorna un usuario que coincide con el ID proporcionado")
     @ApiResponses(value = {
@@ -93,6 +95,7 @@ public class UsuarioController {
                     .body(error.getMessage());
         }
     }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @Operation(summary = "Guardar un nuevo usuario", description = "Guarda un nuevo usuario en la base de datos")
     @ApiResponses(value = {
@@ -115,6 +118,7 @@ public class UsuarioController {
                     .body(error.getMessage());
         }
     }
+
     @CrossOrigin(origins = "http://localhost:4200")
     @Operation(summary = "Eliminar usuario por ID", description = "Elimina un usuario de la base de datos por su ID")
     @ApiResponses(value = {
@@ -136,7 +140,7 @@ public class UsuarioController {
                     .body(error.getMessage());
         }
     }
-
+    @CrossOrigin(origins = "http://localhost:4200")
     @PutMapping("/update/{idUsuario}")
     public ResponseEntity<?> actualizarUsuario(@PathVariable Integer idUsuario, @RequestBody Usuario usuario) {
         try {
@@ -151,21 +155,36 @@ public class UsuarioController {
         }
     }
 
-    @GetMapping("/buscar/{nombre}/{apellido}")
-    public ResponseEntity<?> searchUsuarios(@PathVariable(required = false) String nombre, @PathVariable(required = false) String apellido) {
-        try {
-            List<Usuario> usuarios = servicioUsuario.searchUsuarios(nombre, apellido);
-            return ResponseEntity
-                    .status(HttpStatus.OK)
-                    .body(usuarios);
-        } catch (Exception error) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(error.getMessage());
+ //   @GetMapping("/buscar/{nombre}/{apellido}")
+ //   public ResponseEntity<?> searchUsuarios(@PathVariable(required = false) String nombre, @PathVariable(required = false) String apellido) {
+ //       try {
+ //           List<Usuario> usuarios = servicioUsuario.searchUsuarios(nombre, apellido);
+ //           return ResponseEntity
+ //                   .status(HttpStatus.OK)
+ //                   .body(usuarios);
+ //       } catch (Exception error) {
+ //           return ResponseEntity
+ //                   .status(HttpStatus.BAD_REQUEST)
+ //                   .body(error.getMessage());
+ //       }
+ //   }
+
+   // @GetMapping("/buscar/{nombreCompleto}")
+   // public List<Usuario> buscarPersona(@PathVariable String nombreCompleto) {
+   //     return servicioUsuario.buscarPersona(nombreCompleto);
+   // }
+
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/buscar/{nombreCompleto}")
+    public List<Usuario> buscarPersona(@PathVariable String nombreCompleto) {
+        String[] partes = nombreCompleto.split(" ");
+        if (partes.length > 1) {
+            // Buscar por nombre y apellido
+            return servicioUsuario.buscarPersona(partes[0], partes[1]);
+        } else {
+            // Buscar por nombre
+            return servicioUsuario.buscarPersona(partes[0], null);
         }
     }
-
-
-
 
 }
