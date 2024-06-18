@@ -9,23 +9,23 @@ import java.io.Serializable;
 
 public class ProfesoresAulaPK  implements Serializable {
     @Column(name = "FK_ID_PROFESOR")
-    private Number fkIdProfesor;
+    private Integer fkIdProfesor;
     @Column(name = "FK_ID_AULA")
-    private Number fkIdAula;
+    private Integer fkIdAula;
 
-    public Number getFkIdProfesor() {
+    public Integer getFkIdProfesor() {
         return fkIdProfesor;
     }
 
-    public void setFkIdProfesor(Number fkIdProfesor) {
+    public void setFkIdProfesor(Integer fkIdProfesor) {
         this.fkIdProfesor = fkIdProfesor;
     }
 
-    public Number getFkIdAula() {
+    public Integer getFkIdAula() {
         return fkIdAula;
     }
 
-    public void setFkIdAula(Number fkIdAula) {
+    public void setFkIdAula(Integer fkIdAula) {
         this.fkIdAula = fkIdAula;
     }
 }

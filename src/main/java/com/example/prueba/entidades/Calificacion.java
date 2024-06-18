@@ -1,6 +1,7 @@
 package com.example.prueba.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -11,16 +12,17 @@ public class Calificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column (name = "ID_CALIFICACION")
-    private Number idCalificacion;
+    private Integer idCalificacion;
 
     @Column(name = "FK_ID_ESTUDIANTE_CURSO")
-    private Number fkIdEstudianteCurso;
+    private Integer fkIdEstudianteCurso;
 
     @Column(name = "CALIFICACION")
-    private Number calificacion;
+    private Integer calificacion;
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_ESTUDIANTE_CURSO", insertable = false, updatable = false)
+    @JsonManagedReference
     private EstudiantesCurso estudianteCurso;
 
     public EstudiantesCurso getEstudianteCurso() {
@@ -31,27 +33,27 @@ public class Calificacion {
         this.estudianteCurso = estudianteCurso;
     }
 
-    public Number getIdCalificacion() {
+    public Integer getIdCalificacion() {
         return idCalificacion;
     }
 
-    public void setIdCalificacion(Number idCalificacion) {
+    public void setIdCalificacion(Integer idCalificacion) {
         this.idCalificacion = idCalificacion;
     }
 
-    public Number getFkIdEstudianteCurso() {
+    public Integer getFkIdEstudianteCurso() {
         return fkIdEstudianteCurso;
     }
 
-    public void setFkIdEstudianteCurso(Number fkIdEstudianteCurso) {
+    public void setFkIdEstudianteCurso(Integer fkIdEstudianteCurso) {
         this.fkIdEstudianteCurso = fkIdEstudianteCurso;
     }
 
-    public Number getCalificacion() {
+    public Integer getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Number calificacion) {
+    public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
     }
 }

@@ -1,5 +1,6 @@
 package com.example.prueba.entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -9,7 +10,7 @@ public class Departamento {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_DEPARTAMENTO")
-    private Number idDepartamento;
+    private Integer idDepartamento;
 
     @Column(name = "NOMBRE_DEPARTAMENTO")
     private String nombreDepartamento;
@@ -27,10 +28,11 @@ public class Departamento {
     private String jefeDepartamento;
 
     @Column(name = "FK_ID_PROFESOR")
-    private Number fkIdProfesor;
+    private Integer fkIdProfesor;
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
+    @JsonManagedReference
     private Profesor jefeDepartamentoProfesor;
 
     public Profesor getJefeDepartamentoProfesor() {
@@ -41,11 +43,11 @@ public class Departamento {
         this.jefeDepartamentoProfesor = jefeDepartamentoProfesor;
     }
 
-    public Number getIdDepartamento() {
+    public Integer getIdDepartamento() {
         return idDepartamento;
     }
 
-    public void setIdDepartamento(Number idDepartamento) {
+    public void setIdDepartamento(Integer idDepartamento) {
         this.idDepartamento = idDepartamento;
     }
 
@@ -89,11 +91,11 @@ public class Departamento {
         this.jefeDepartamento = jefeDepartamento;
     }
 
-    public Number getFkIdProfesor() {
+    public Integer getFkIdProfesor() {
         return fkIdProfesor;
     }
 
-    public void setFkIdProfesor(Number fkIdProfesor) {
+    public void setFkIdProfesor(Integer fkIdProfesor) {
         this.fkIdProfesor = fkIdProfesor;
     }
 }

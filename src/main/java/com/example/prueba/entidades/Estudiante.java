@@ -1,6 +1,7 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -33,18 +34,18 @@ public class Estudiante {
     private String estado;
 
 
+    @OneToMany(mappedBy = "estudiante")
+    @JsonBackReference
+    private List<EstudiantesCurso> estudiantesCurso;
 
-//    @OneToMany(mappedBy = "estudiante")
-//    List<EstudiantesCurso> estudiante;
-//
-//    public List<EstudiantesCurso> getEstudiante() {
-//        return estudiante;
-//    }
-//
-//    public void setEstudiante(List<EstudiantesCurso> estudiante) {
-//        this.estudiante = estudiante;
-//    }
 
+    public List<EstudiantesCurso> getEstudiantesCurso() {
+        return estudiantesCurso;
+    }
+
+    public void setEstudiantesCurso(List<EstudiantesCurso> estudiantesCurso) {
+        this.estudiantesCurso = estudiantesCurso;
+    }
 
     public Integer getFkIdUsuario() {
         return fkIdUsuario;

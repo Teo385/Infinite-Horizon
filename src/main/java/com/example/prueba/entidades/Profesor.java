@@ -1,6 +1,7 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,42 +34,44 @@ public class Profesor {
     @Column(name = "ESPECIALIZACION")
     private String especializacion;
 
+    @OneToMany(mappedBy = "profesor")
+    @JsonBackReference
+    private List<ProfesoresAula> profesoresAula;
+
+    @OneToMany(mappedBy = "profesor")
+    @JsonBackReference
+    private List<Curso>  cursos;
+
+    @OneToMany(mappedBy = "jefeDepartamentoProfesor")
+    @JsonBackReference
+    private List<Departamento>  departamentos;
+
+
+    public List<ProfesoresAula> getProfesoresAula() {
+        return profesoresAula;
+    }
+
+    public void setProfesoresAula(List<ProfesoresAula> profesoresAula) {
+        this.profesoresAula = profesoresAula;
+    }
 
 
 
-//    @OneToMany(mappedBy = "profesor")
-//    private List<ProfesoresAula> profesor;
-//
-//    @OneToMany(mappedBy = "profesor")
-//    private List<Curso>  cursos;
-//
-//    @OneToMany(mappedBy = "jefeDepartamentoProfesor")
-//    private List<Departamento>  departamentos;
+   public List<Curso> getCursos() {
+       return cursos;
+   }
 
+   public void setCursos(List<Curso> cursos) {
+       this.cursos = cursos;
+   }
 
-//    public List<ProfesoresAula> getProfesor() {
-//        return profesor;
-//    }
-//
-//    public void setProfesor(List<ProfesoresAula> profesor) {
-//        this.profesor = profesor;
-//    }
-//
-//    public List<Curso> getCursos() {
-//        return cursos;
-//    }
-//
-//    public void setCursos(List<Curso> cursos) {
-//        this.cursos = cursos;
-//    }
-//
-//    public List<Departamento> getDepartamentos() {
-//        return departamentos;
-//    }
-//
-//    public void setDepartamentos(List<Departamento> departamentos) {
-//        this.departamentos = departamentos;
-//    }
+   public List<Departamento> getDepartamentos() {
+        return departamentos;
+    }
+
+    public void setDepartamentos(List<Departamento> departamentos) {
+        this.departamentos = departamentos;
+    }
 
 
     public Integer getFkIdUsuario() {

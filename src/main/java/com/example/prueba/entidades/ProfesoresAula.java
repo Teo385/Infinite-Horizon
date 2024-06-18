@@ -1,5 +1,6 @@
 package com.example.prueba.entidades;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -11,10 +12,12 @@ public class ProfesoresAula {
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_AULA", insertable = false, updatable = false)
+    @JsonManagedReference
     private Aula aula;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
+    @JoinColumn(name = "FK_ID_PROFESOR",referencedColumnName = "ID_PROFESOR", insertable = false, updatable = false)
+    @JsonManagedReference
     private Profesor profesor;
 
     public Aula getAula() {

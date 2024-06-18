@@ -26,7 +26,7 @@ public class Aula {
     @Column(name = "EQUIPAMIENTO")
     private String equipamiento;
 
-    // Constructor, getters y setters
+
     public Aula() {}
 
     public Aula(Integer idAula, Integer numeroAula, Integer capacidad, String edificio, String ubicacion, String equipamiento) {

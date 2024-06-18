@@ -1,5 +1,7 @@
 package com.example.prueba.entidades;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -12,23 +14,26 @@ public class EstudiantesCurso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_ESTUDIANTE_CURSO")
-    private Long idEstudianteCurso;
+    private Integer idEstudianteCurso;
 
     @Column(name = "FK_ID_ESTUDIANTE")
-    private Number fkIdEstudiante;
+    private Integer fkIdEstudiante;
 
     @Column(name = "FK_ID_CURSO")
-    private Number fkIdCurso;
+    private Integer fkIdCurso;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ID_ESTUDIANTE", insertable = false, updatable = false)
+    @JoinColumn(name = "FK_ID_ESTUDIANTE", referencedColumnName = "ID_ESTUDIANTE", insertable = false, updatable = false)
+    @JsonBackReference
     private Estudiante estudiante;
 
     @ManyToOne
-    @JoinColumn(name = "FK_ID_CURSO", insertable = false, updatable = false)
+    @JoinColumn(name = "FK_ID_CURSO", referencedColumnName = "ID_CURSO", insertable = false, updatable = false)
+    @JsonManagedReference
     private Curso curso;
 
     @OneToMany(mappedBy = "estudianteCurso")
+    @JsonManagedReference
     private List<Calificacion> estudianteCurso;
 
     public Estudiante getEstudiante() {
@@ -55,27 +60,27 @@ public class EstudiantesCurso {
         this.estudianteCurso = estudianteCurso;
     }
 
-    public Long getIdEstudianteCurso() {
+    public Integer getIdEstudianteCurso() {
         return idEstudianteCurso;
     }
 
-    public void setIdEstudianteCurso(Long idEstudianteCurso) {
+    public void setIdEstudianteCurso(Integer idEstudianteCurso) {
         this.idEstudianteCurso = idEstudianteCurso;
     }
 
-    public Number getFkIdEstudiante() {
+    public Integer getFkIdEstudiante() {
         return fkIdEstudiante;
     }
 
-    public void setFkIdEstudiante(Number fkIdEstudiante) {
+    public void setFkIdEstudiante(Integer fkIdEstudiante) {
         this.fkIdEstudiante = fkIdEstudiante;
     }
 
-    public Number getFkIdCurso() {
+    public Integer getFkIdCurso() {
         return fkIdCurso;
     }
 
-    public void setFkIdCurso(Number fkIdCurso) {
+    public void setFkIdCurso(Integer fkIdCurso) {
         this.fkIdCurso = fkIdCurso;
     }
 }

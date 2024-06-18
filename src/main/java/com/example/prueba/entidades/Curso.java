@@ -1,6 +1,8 @@
 package com.example.prueba.entidades;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
 
@@ -12,13 +14,18 @@ public class Curso {
 
     @Id
     @Column(name = "ID_CURSO")
-    private Number idCurso;
+    private Integer idCurso;
 
     @Column(name = "NOMBRE_CURSO")
     private String nombreCurso;
 
+
+    @ManyToOne
+    @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
+    private Profesor profesor;
+
     @Column(name = "FK_ID_PROFESOR")
-    private Number fkIdProfesor;
+    private Integer fkIdProfesor;
 
     @Column(name = "DEPARTAMENTO")
     private String departamento;
@@ -27,25 +34,34 @@ public class Curso {
     private String horario;
 
     @Column(name = "CREDITOS")
-    private Number creditos;
+    private Integer creditos;
 
-    @ManyToOne
-    @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
-    private Profesor profesor;
+    @OneToMany(mappedBy = "curso")
+    @JsonBackReference
+    private List<EstudiantesCurso> estudiantesCurso;
+
 
     public Profesor getProfesor() {
         return profesor;
+    }
+
+    public List<EstudiantesCurso> getEstudiantesCurso() {
+        return estudiantesCurso;
+    }
+
+    public void setEstudiantesCurso(List<EstudiantesCurso> estudiantesCurso) {
+        this.estudiantesCurso = estudiantesCurso;
     }
 
     public void setProfesor(Profesor profesor) {
         this.profesor = profesor;
     }
 
-    public Number getIdCurso() {
+    public Integer getIdCurso() {
         return idCurso;
     }
 
-    public void setIdCurso(Number idCurso) {
+    public void setIdCurso(Integer idCurso) {
         this.idCurso = idCurso;
     }
 
@@ -57,11 +73,11 @@ public class Curso {
         this.nombreCurso = nombreCurso;
     }
 
-    public Number getFkIdProfesor() {
+    public Integer getFkIdProfesor() {
         return fkIdProfesor;
     }
 
-    public void setFkIdProfesor(Number fkIdProfesor) {
+    public void setFkIdProfesor(Integer fkIdProfesor) {
         this.fkIdProfesor = fkIdProfesor;
     }
 
@@ -81,11 +97,11 @@ public class Curso {
         this.horario = horario;
     }
 
-    public Number getCreditos() {
+    public Integer getCreditos() {
         return creditos;
     }
 
-    public void setCreditos(Number creditos) {
+    public void setCreditos(Integer creditos) {
         this.creditos = creditos;
     }
 }
