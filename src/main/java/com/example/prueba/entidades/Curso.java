@@ -2,6 +2,7 @@ package com.example.prueba.entidades;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 
@@ -19,9 +20,9 @@ public class Curso {
     @Column(name = "NOMBRE_CURSO")
     private String nombreCurso;
 
-
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
+    @JsonIgnore
     private Profesor profesor;
 
     @Column(name = "FK_ID_PROFESOR")
@@ -37,9 +38,8 @@ public class Curso {
     private Integer creditos;
 
     @OneToMany(mappedBy = "curso")
-    @JsonBackReference
+    @JsonIgnore
     private List<EstudiantesCurso> estudiantesCurso;
-
 
     public Profesor getProfesor() {
         return profesor;

@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -105,7 +106,7 @@ public class UsuarioController {
             @ApiResponse(responseCode = "400", description = "Error en la solicitud",
                     content = @Content)
     })
-    @PostMapping("/save")
+    @PostMapping(value = "/save", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> save(@RequestBody Usuario usuario) {
         try {
             Usuario savedUsuario = servicioUsuario.save(usuario);
@@ -141,7 +142,7 @@ public class UsuarioController {
         }
     }
     @CrossOrigin(origins = "http://localhost:4200")
-    @PutMapping("/update/{idUsuario}")
+    @PutMapping(value = "/update/{idUsuario}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> actualizarUsuario(@PathVariable Integer idUsuario, @RequestBody Usuario usuario) {
         try {
             Usuario usuarioActualizado = servicioUsuario.updateUser(usuario);

@@ -1,17 +1,15 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "PROFESORES")
 public class Profesor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID_PROFESOR")
@@ -21,8 +19,8 @@ public class Profesor {
     private Integer fkIdUsuario;
 
     @OneToOne
-    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO",insertable = false, updatable = false)
-    @JsonBackReference
+    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
+    @JsonBackReference("usuario-profesor")
     private Usuario usuario;
 
     @Column(name = "DEPARTAMENTO")
@@ -35,29 +33,26 @@ public class Profesor {
     private String especializacion;
 
     @OneToMany(mappedBy = "profesor")
-    @JsonBackReference
+    @JsonIgnore
     private List<ProfesoresAula> profesoresAula;
 
     @OneToMany(mappedBy = "profesor")
-    @JsonBackReference
-    private List<Curso>  cursos;
+    @JsonIgnore
+    private List<Curso> cursos;
 
     @OneToMany(mappedBy = "jefeDepartamentoProfesor")
-    @JsonBackReference
-    private List<Departamento>  departamentos;
-
-
-    public List<ProfesoresAula> getProfesoresAula() {
-        return profesoresAula;
-    }
+    @JsonIgnore
+    private List<Departamento> departamentos;
 
     public void setProfesoresAula(List<ProfesoresAula> profesoresAula) {
         this.profesoresAula = profesoresAula;
     }
 
+    public List<ProfesoresAula> getProfesoresAula() {
+        return profesoresAula;
+    }
 
-
-   public List<Curso> getCursos() {
+    public List<Curso> getCursos() {
        return cursos;
    }
 

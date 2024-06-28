@@ -13,6 +13,7 @@ public class EstudianteDto {
     private Integer numeroAula;
     private String pisoAula;
     private String edificioAula;
+    private Double NotaFinal;
     private Number fkIdUsuario  ;
 
 
@@ -98,5 +99,13 @@ public class EstudianteDto {
 
     public void setEdificioAula(String edificioAula) {
         this.edificioAula = edificioAula;
+    }
+
+    public Double getNotaFinal() {
+        return NotaFinal;
+    }
+
+    public void setNotaFinal(Double notaFional) {
+        NotaFinal = notaFional;
     }
 }

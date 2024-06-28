@@ -1,7 +1,6 @@
 package com.example.prueba.entidades;
 
-
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -18,11 +17,11 @@ public class Calificacion {
     private Integer fkIdEstudianteCurso;
 
     @Column(name = "CALIFICACION")
-    private Integer calificacion;
+    private Double calificacion;
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_ESTUDIANTE_CURSO", insertable = false, updatable = false)
-    @JsonManagedReference
+    @JsonIgnore
     private EstudiantesCurso estudianteCurso;
 
     public EstudiantesCurso getEstudianteCurso() {
@@ -33,12 +32,12 @@ public class Calificacion {
         this.estudianteCurso = estudianteCurso;
     }
 
-    public Integer getIdCalificacion() {
-        return idCalificacion;
+    public Double getCalificacion() {
+        return calificacion;
     }
 
-    public void setIdCalificacion(Integer idCalificacion) {
-        this.idCalificacion = idCalificacion;
+    public void setCalificacion(Double calificacion) {
+        this.calificacion = calificacion;
     }
 
     public Integer getFkIdEstudianteCurso() {
@@ -49,11 +48,11 @@ public class Calificacion {
         this.fkIdEstudianteCurso = fkIdEstudianteCurso;
     }
 
-    public Integer getCalificacion() {
-        return calificacion;
+    public Integer getIdCalificacion() {
+        return idCalificacion;
     }
 
-    public void setCalificacion(Integer calificacion) {
-        this.calificacion = calificacion;
+    public void setIdCalificacion(Integer idCalificacion) {
+        this.idCalificacion = idCalificacion;
     }
 }

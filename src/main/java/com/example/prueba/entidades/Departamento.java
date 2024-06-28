@@ -1,6 +1,6 @@
 package com.example.prueba.entidades;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -32,7 +32,7 @@ public class Departamento {
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_PROFESOR", insertable = false, updatable = false)
-    @JsonManagedReference
+    @JsonIgnore
     private Profesor jefeDepartamentoProfesor;
 
     public Profesor getJefeDepartamentoProfesor() {

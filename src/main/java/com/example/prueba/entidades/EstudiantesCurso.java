@@ -1,7 +1,7 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 
@@ -22,19 +22,19 @@ public class EstudiantesCurso {
     @Column(name = "FK_ID_CURSO")
     private Integer fkIdCurso;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "FK_ID_ESTUDIANTE", referencedColumnName = "ID_ESTUDIANTE", insertable = false, updatable = false)
-    @JsonBackReference
+    @JsonIgnore
     private Estudiante estudiante;
 
     @ManyToOne
     @JoinColumn(name = "FK_ID_CURSO", referencedColumnName = "ID_CURSO", insertable = false, updatable = false)
-    @JsonManagedReference
+    @JsonIgnore
     private Curso curso;
 
     @OneToMany(mappedBy = "estudianteCurso")
-    @JsonManagedReference
-    private List<Calificacion> estudianteCurso;
+    @JsonIgnore
+    private List<Calificacion> calificacion;
 
     public Estudiante getEstudiante() {
         return estudiante;
@@ -53,11 +53,11 @@ public class EstudiantesCurso {
     }
 
     public List<Calificacion> getEstudianteCurso() {
-        return estudianteCurso;
+        return calificacion;
     }
 
-    public void setEstudianteCurso(List<Calificacion> estudianteCurso) {
-        this.estudianteCurso = estudianteCurso;
+    public void setEstudianteCurso(List<Calificacion> calificacion) {
+        this.calificacion = calificacion;
     }
 
     public Integer getIdEstudianteCurso() {

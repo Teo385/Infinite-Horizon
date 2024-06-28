@@ -35,4 +35,10 @@ public class EstudianteDtoController {
         return new ResponseEntity<>(dtos, HttpStatus.OK);
     }
 
+    @CrossOrigin(origins = "http://localhost:4200")
+    @GetMapping("/curso/{nombreCurso}")
+    public List<EstudianteDto> obtenerEstudiantesPorCurso(@PathVariable String nombreCurso) {
+        return servicioEstudianteDto.obtenerEstudiantesPorCurso(nombreCurso);
+    }
+
 }

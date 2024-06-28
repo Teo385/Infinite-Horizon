@@ -1,10 +1,8 @@
 package com.example.prueba.entidades;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.springframework.web.bind.annotation.GetMapping;
-
 import java.util.List;
 
 @Entity
@@ -20,8 +18,8 @@ public class Estudiante {
     private Integer fkIdUsuario;
 
     @OneToOne
-    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO",insertable = false, updatable = false)
-    @JsonBackReference
+    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
+    @JsonBackReference("usuario-estudiante")
     private Usuario usuario;
 
     @Column(name = "CARRERA")
@@ -33,9 +31,8 @@ public class Estudiante {
     @Column(name = "ESTADO")
     private String estado;
 
-
     @OneToMany(mappedBy = "estudiante")
-    @JsonBackReference
+    @JsonIgnore
     private List<EstudiantesCurso> estudiantesCurso;
 
 

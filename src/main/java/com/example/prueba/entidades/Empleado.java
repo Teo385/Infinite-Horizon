@@ -18,8 +18,8 @@ public class Empleado {
     private Integer fkIdUsuario;
 
     @OneToOne
-    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO",insertable = false, updatable = false)
-    @JsonBackReference
+    @JoinColumn(name = "FK_ID_USUARIO", referencedColumnName = "ID_USUARIO", insertable = false, updatable = false)
+    @JsonBackReference("usuario-empleado")
     private Usuario usuario;
 
     @Column(name = "AREA")
